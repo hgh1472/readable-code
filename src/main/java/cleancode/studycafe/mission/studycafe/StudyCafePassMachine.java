@@ -75,8 +75,8 @@ public class StudyCafePassMachine {
     }
 
     private List<StudyCafePass> findAvailablePassesFrom(StudyCafePassType studyCafePassType) {
-        List<StudyCafePass> findPasses = passReader.readStudyCafePasses();
-        StudyCafePasses studyCafePasses = StudyCafePasses.of(findPasses);
+        List<StudyCafePass> existingStudyCafePasses = passReader.readStudyCafePasses();
+        StudyCafePasses studyCafePasses = StudyCafePasses.of(existingStudyCafePasses);
         return studyCafePasses.extractBy(studyCafePassType);
 
     }
@@ -87,25 +87,23 @@ public class StudyCafePassMachine {
     }
 
     private Optional<StudyCafeLockerPass> findAvailableLockerFor(StudyCafePass selectedPass) {
-        List<StudyCafeLockerPass> availableLocker = passReader.readLockerPasses();
-        return availableLocker.stream()
+        List<StudyCafeLockerPass> existingLockerPasses = passReader.readLockerPasses();
+        return existingLockerPasses.stream()
                 .filter(selectedPass::isMatchLocker)
                 .findFirst();
     }
 
     private Optional<StudyCafeLockerPass> askLockerUsage(StudyCafeLockerPass availableLocker) {
-        boolean lockerUsageFromUser = getLockerUsageFromUser(availableLocker);
-        if (lockerUsageFromUser) {
+        boolean doesUserUseLocker = getLockerUsageFromUser(availableLocker);
+        if (doesUserUseLocker) {
             return Optional.of(availableLocker);
         }
         return Optional.empty();
     }
 
     private boolean getLockerUsageFromUser(StudyCafeLockerPass lockerPass) {
-        boolean lockerSelection;
         outputHandler.askLockerPass(lockerPass);
-        lockerSelection = inputHandler.getLockerSelection();
-        return lockerSelection;
+        return inputHandler.getLockerSelection();
     }
 
 }
