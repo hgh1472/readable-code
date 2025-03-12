@@ -10,30 +10,6 @@ import java.util.List;
 
 public class ConsoleOutputHandler implements OutputHandler {
 
-    private static String indicateNumber(int index) {
-        return String.format("%s. ", index + 1);
-    }
-
-    private static void showDiscountPrice(Order order) {
-        int discountPrice = order.calculateDiscountPrice();
-        System.out.println("이벤트 할인 금액: " + discountPrice + "원");
-    }
-
-    private static void showTotalPrice(Order order) {
-        int totalPrice = order.calculateTotalPrice();
-        System.out.println("총 결제 금액: " + totalPrice + "원");
-        separateLine();
-    }
-
-    private static void showSummaryHeader() {
-        separateLine();
-        System.out.println("이용 내역");
-    }
-
-    private static void separateLine() {
-        System.out.println();
-    }
-
     @Override
     public void showWelcomeMessage() {
         System.out.println("*** 프리미엄 스터디카페 ***");
@@ -89,14 +65,19 @@ public class ConsoleOutputHandler implements OutputHandler {
         showTotalPrice(order);
     }
 
-    @Override
-    public void showSimpleMessage(String message) {
-        System.out.println(message);
+    private static String indicateNumber(int index) {
+        return String.format("%s. ", index + 1);
     }
 
-    @Override
-    public void showError(Exception e) {
-        System.out.println(e.getMessage());
+    private static void showTotalPrice(Order order) {
+        int totalPrice = order.calculateTotalPrice();
+        System.out.println("총 결제 금액: " + totalPrice + "원");
+        separateLine();
+    }
+
+    private static void showSummaryHeader() {
+        separateLine();
+        System.out.println("이용 내역");
     }
 
     private void showPassInformation(Order order) {
@@ -109,6 +90,11 @@ public class ConsoleOutputHandler implements OutputHandler {
         System.out.println("사물함: " + lockerInformation);
     }
 
+    private static void showDiscountPrice(Order order) {
+        int discountPrice = order.calculateDiscountPrice();
+        System.out.println("이벤트 할인 금액: " + discountPrice + "원");
+    }
+
     private String extractPassInformation(Pass pass) {
         int duration = pass.getDuration();
         int price = pass.getPrice();
@@ -119,5 +105,19 @@ public class ConsoleOutputHandler implements OutputHandler {
             return String.format("%s주권 - %d원", duration, price);
         }
         throw new AppException("지원되지 않는 이용권입니다.");
+    }
+
+    @Override
+    public void showSimpleMessage(String message) {
+        System.out.println(message);
+    }
+
+    @Override
+    public void showError(Exception e) {
+        System.out.println(e.getMessage());
+    }
+
+    private static void separateLine() {
+        System.out.println();
     }
 }

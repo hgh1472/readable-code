@@ -20,27 +20,6 @@ public class FilePassReader implements PassReader {
     private static final int PRICE_INDEX = 2;
     private static final int DISCOUNT_RATE_INDEX = 3;
 
-    private static StudyCafePass extractStudyCafePassFrom(String line) {
-        String[] values = line.split(",");
-
-        StudyCafePassType studyCafePassType = StudyCafePassType.valueOf(values[TYPE_INDEX]);
-        int duration = Integer.parseInt(values[DURATION_INDEX]);
-        int price = Integer.parseInt(values[PRICE_INDEX]);
-        double discountRate = Double.parseDouble(values[DISCOUNT_RATE_INDEX]);
-
-        return StudyCafePass.of(studyCafePassType, duration, price, discountRate);
-    }
-
-    private static StudyCafeLockerPass extractLockerPassFrom(String line) {
-        String[] values = line.split(",");
-
-        StudyCafePassType studyCafePassType = StudyCafePassType.valueOf(values[TYPE_INDEX]);
-        int duration = Integer.parseInt(values[DURATION_INDEX]);
-        int price = Integer.parseInt(values[PRICE_INDEX]);
-
-        return StudyCafeLockerPass.of(studyCafePassType, duration, price);
-    }
-
     @Override
     public List<StudyCafePass> readStudyCafePasses() {
         try {
@@ -71,6 +50,27 @@ public class FilePassReader implements PassReader {
         } catch (IOException e) {
             throw new RuntimeException("파일을 읽는데 실패했습니다.", e);
         }
+    }
+
+    private static StudyCafePass extractStudyCafePassFrom(String line) {
+        String[] values = line.split(",");
+
+        StudyCafePassType studyCafePassType = StudyCafePassType.valueOf(values[TYPE_INDEX]);
+        int duration = Integer.parseInt(values[DURATION_INDEX]);
+        int price = Integer.parseInt(values[PRICE_INDEX]);
+        double discountRate = Double.parseDouble(values[DISCOUNT_RATE_INDEX]);
+
+        return StudyCafePass.of(studyCafePassType, duration, price, discountRate);
+    }
+
+    private static StudyCafeLockerPass extractLockerPassFrom(String line) {
+        String[] values = line.split(",");
+
+        StudyCafePassType studyCafePassType = StudyCafePassType.valueOf(values[TYPE_INDEX]);
+        int duration = Integer.parseInt(values[DURATION_INDEX]);
+        int price = Integer.parseInt(values[PRICE_INDEX]);
+
+        return StudyCafeLockerPass.of(studyCafePassType, duration, price);
     }
 
 }
