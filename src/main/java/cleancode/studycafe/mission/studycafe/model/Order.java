@@ -16,10 +16,6 @@ public class Order {
         return new Order(new ArrayList<>());
     }
 
-    public static Order of(List<Pass> passes) {
-        return new Order(passes);
-    }
-
     public void addPass(Pass pass) {
         passes.add(pass);
     }
