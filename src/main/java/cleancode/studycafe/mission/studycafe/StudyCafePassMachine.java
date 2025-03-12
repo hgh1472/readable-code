@@ -69,6 +69,23 @@ public class StudyCafePassMachine {
         return Optional.empty();
     }
 
+    private StudyCafePassType getSelectedPassTypeFromUser() {
+        outputHandler.askPassTypeSelection();
+        return inputHandler.getPassTypeSelectingUserAction();
+    }
+
+    private List<StudyCafePass> findAvailablePassesFrom(StudyCafePassType studyCafePassType) {
+        List<StudyCafePass> findPasses = passReader.readStudyCafePasses();
+        StudyCafePasses studyCafePasses = StudyCafePasses.of(findPasses);
+        return studyCafePasses.extractBy(studyCafePassType);
+
+    }
+
+    private StudyCafePass getSelectedPassFrom(List<StudyCafePass> hourlyPasses) {
+        outputHandler.showPassListForSelection(hourlyPasses);
+        return inputHandler.getSelectedPass(hourlyPasses);
+    }
+
     private Optional<StudyCafeLockerPass> findAvailableLockerFor(StudyCafePass selectedPass) {
         List<StudyCafeLockerPass> availableLocker = passReader.readLockerPasses();
         return availableLocker.stream()
@@ -89,23 +106,6 @@ public class StudyCafePassMachine {
         outputHandler.askLockerPass(lockerPass);
         lockerSelection = inputHandler.getLockerSelection();
         return lockerSelection;
-    }
-
-    private StudyCafePass getSelectedPassFrom(List<StudyCafePass> hourlyPasses) {
-        outputHandler.showPassListForSelection(hourlyPasses);
-        return inputHandler.getSelectedPass(hourlyPasses);
-    }
-
-    private List<StudyCafePass> findAvailablePassesFrom(StudyCafePassType studyCafePassType) {
-        List<StudyCafePass> findPasses = passReader.readStudyCafePasses();
-        StudyCafePasses studyCafePasses = StudyCafePasses.of(findPasses);
-        return studyCafePasses.extractBy(studyCafePassType);
-
-    }
-
-    private StudyCafePassType getSelectedPassTypeFromUser() {
-        outputHandler.askPassTypeSelection();
-        return inputHandler.getPassTypeSelectingUserAction();
     }
 
 }
