@@ -15,6 +15,8 @@ public class ConsoleInputHandler implements InputHandler {
     private static final String WEEKLY_TYPE = "2";
     private static final String FIXED_TYPE = "3";
 
+    private static final String USE_LOCKER = "1";
+
     @Override
     public StudyCafePassType getPassTypeSelectingUserAction() {
         String userInput = SCANNER.nextLine();
@@ -41,7 +43,7 @@ public class ConsoleInputHandler implements InputHandler {
     @Override
     public boolean getLockerSelection() {
         String userInput = SCANNER.nextLine();
-        return HOURLY_TYPE.equals(userInput);
+        return USE_LOCKER.equals(userInput);
     }
 
 }
