@@ -4,7 +4,7 @@ import cleancode.studycafe.mission.studycafe.config.StudyCafeConfig;
 import cleancode.studycafe.mission.studycafe.exception.AppException;
 import cleancode.studycafe.mission.studycafe.io.InputHandler;
 import cleancode.studycafe.mission.studycafe.io.OutputHandler;
-import cleancode.studycafe.mission.studycafe.io.StudyCafePassReader;
+import cleancode.studycafe.mission.studycafe.io.PassReader;
 import cleancode.studycafe.mission.studycafe.model.*;
 
 import java.util.List;
@@ -14,12 +14,12 @@ public class StudyCafePassMachine {
 
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
-    private final StudyCafePassReader studyCafeHandler;
+    private final PassReader passReader;
 
     public StudyCafePassMachine(StudyCafeConfig studyCafeConfig) {
         this.inputHandler = studyCafeConfig.getInputHandler();
         this.outputHandler = studyCafeConfig.getOutputHandler();
-        this.studyCafeHandler = studyCafeConfig.getStudyCafeHandler();
+        this.passReader = studyCafeConfig.getPassReader();
     }
 
     public void run() {
@@ -70,7 +70,7 @@ public class StudyCafePassMachine {
     }
 
     private Optional<StudyCafeLockerPass> findAvailableLockerFor(StudyCafePass selectedPass) {
-        List<StudyCafeLockerPass> availableLocker = studyCafeHandler.readLockerPasses();
+        List<StudyCafeLockerPass> availableLocker = passReader.readLockerPasses();
         return availableLocker.stream()
                 .filter(selectedPass::isMatchLocker)
                 .findFirst();
@@ -97,7 +97,7 @@ public class StudyCafePassMachine {
     }
 
     private List<StudyCafePass> findAvailablePassesFrom(StudyCafePassType studyCafePassType) {
-        List<StudyCafePass> findPasses = studyCafeHandler.readStudyCafePasses();
+        List<StudyCafePass> findPasses = passReader.readStudyCafePasses();
         StudyCafePasses studyCafePasses = StudyCafePasses.of(findPasses);
         return studyCafePasses.extractBy(studyCafePassType);
 

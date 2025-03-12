@@ -5,7 +5,7 @@ import cleancode.studycafe.mission.studycafe.model.StudyCafePass;
 
 import java.util.List;
 
-public interface StudyCafePassReader {
+public interface PassReader {
 
     List<StudyCafePass> readStudyCafePasses();
 

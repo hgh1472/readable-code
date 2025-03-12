@@ -2,17 +2,17 @@ package cleancode.studycafe.mission.studycafe.config;
 
 import cleancode.studycafe.mission.studycafe.io.InputHandler;
 import cleancode.studycafe.mission.studycafe.io.OutputHandler;
-import cleancode.studycafe.mission.studycafe.io.StudyCafePassReader;
+import cleancode.studycafe.mission.studycafe.io.PassReader;
 
 public class StudyCafeConfig {
     private final InputHandler inputHandler;
     private final OutputHandler outputHandler;
-    private final StudyCafePassReader studyCafeHandler;
+    private final PassReader passReader;
 
-    public StudyCafeConfig(InputHandler inputHandler, OutputHandler outputHandler, StudyCafePassReader studyCafeHandler) {
+    public StudyCafeConfig(InputHandler inputHandler, OutputHandler outputHandler, PassReader passReader) {
         this.inputHandler = inputHandler;
         this.outputHandler = outputHandler;
-        this.studyCafeHandler = studyCafeHandler;
+        this.passReader = passReader;
     }
 
     public InputHandler getInputHandler() {
@@ -23,8 +23,8 @@ public class StudyCafeConfig {
         return outputHandler;
     }
 
-    public StudyCafePassReader getStudyCafeHandler() {
-        return studyCafeHandler;
+    public PassReader getPassReader() {
+        return passReader;
     }
 
 }

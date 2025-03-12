@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudyCafeFileReader implements StudyCafePassReader {
+public class FilePassReader implements PassReader {
 
     private static final String PASS_LIST_PATH = "src/main/resources/cleancode/studycafe/pass-list.csv";
     private static final String LOCKER_PATH = "src/main/resources/cleancode/studycafe/locker.csv";
