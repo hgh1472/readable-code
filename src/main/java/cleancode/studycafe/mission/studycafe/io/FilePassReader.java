@@ -52,7 +52,7 @@ public class FilePassReader implements PassReader {
         }
     }
 
-    private static StudyCafePass extractStudyCafePassFrom(String line) {
+    private StudyCafePass extractStudyCafePassFrom(String line) {
         String[] values = line.split(",");
 
         StudyCafePassType studyCafePassType = StudyCafePassType.valueOf(values[TYPE_INDEX]);
@@ -63,7 +63,7 @@ public class FilePassReader implements PassReader {
         return StudyCafePass.of(studyCafePassType, duration, price, discountRate);
     }
 
-    private static StudyCafeLockerPass extractLockerPassFrom(String line) {
+    private StudyCafeLockerPass extractLockerPassFrom(String line) {
         String[] values = line.split(",");
 
         StudyCafePassType studyCafePassType = StudyCafePassType.valueOf(values[TYPE_INDEX]);

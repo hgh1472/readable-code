@@ -65,17 +65,17 @@ public class ConsoleOutputHandler implements OutputHandler {
         showTotalPrice(order);
     }
 
-    private static String indicateNumber(int index) {
+    private String indicateNumber(int index) {
         return String.format("%s. ", index + 1);
     }
 
-    private static void showTotalPrice(Order order) {
+    private void showTotalPrice(Order order) {
         int totalPrice = order.calculateTotalPrice();
         System.out.println("총 결제 금액: " + totalPrice + "원");
         separateLine();
     }
 
-    private static void showSummaryHeader() {
+    private void showSummaryHeader() {
         separateLine();
         System.out.println("이용 내역");
     }
@@ -90,7 +90,7 @@ public class ConsoleOutputHandler implements OutputHandler {
         System.out.println("사물함: " + lockerInformation);
     }
 
-    private static void showDiscountPrice(Order order) {
+    private void showDiscountPrice(Order order) {
         int discountPrice = order.calculateDiscountPrice();
         System.out.println("이벤트 할인 금액: " + discountPrice + "원");
     }
@@ -117,7 +117,7 @@ public class ConsoleOutputHandler implements OutputHandler {
         System.out.println(e.getMessage());
     }
 
-    private static void separateLine() {
+    private void separateLine() {
         System.out.println();
     }
 }
